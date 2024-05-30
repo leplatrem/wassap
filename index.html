@@ -70,6 +70,20 @@
         }
     </style>
     <script>
+        document.addEventListener("load", () => {
+            const savedPrefix = localStorage.getItem("lastPrefix");
+            if (savedPrefix) {
+                document.querySelector('select').value = savedPrefix;
+            }
+        });
+
+        function saveLastCountry(e) {
+            const value = e.target.value;
+            if (value) {
+                localStorage.setItem("lastPrefix", value);
+            }
+        }
+
         function updateWhatsAppLink() {
             const select = document.querySelector('select');
             const input = document.querySelector('input[type="tel"]');
@@ -92,6 +106,7 @@
             const select = document.querySelector('select');
             const input = document.querySelector('input[type="tel"]');
             select.addEventListener('change', updateWhatsAppLink);
+            select.addEventListener('change', saveLastCountry);
             input.addEventListener('input', updateWhatsAppLink);
         });
     </script>
@@ -100,13 +115,20 @@
     <div class="input-group">
         <select>
             <option value="+34">🇪🇸 +34</option>
-            <option value="+33">🇫🇷 +33</option>
-            <option value="+49">🇩🇪 +49</option>
-            <option value="+32">🇧🇪 +32</option>
+            <option value="+1">🇺🇸 +1</option>
+            <option value="+20">🇪🇬 +20</option>
             <option value="+30">🇬🇷 +30</option>
-            <option value="+39">🇮🇹 +39</option>
             <option value="+31">🇳🇱 +31</option>
+            <option value="+32">🇧🇪 +32</option>
+            <option value="+33">🇫🇷 +33</option>
+            <option value="+351">🇵🇹 +351</option>
+            <option value="+353">🇮🇪 +353</option>
+            <option value="+39">🇮🇹 +39</option>
             <option value="+40">🇷🇴 +40</option>
+            <option value="+41">🇨🇭 +41</option>
+            <option value="+44">🇬🇧 +44</option>
+            <option value="+49">🇩🇪 +49</option>
+            <option value="+54">🇦🇷 +54</option>
             <option value="">-</option>
         </select>
         <input type="tel" placeholder="Introduce el número de teléfono">
