@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campo de Teléfono con Prefijos y Icono de WhatsApp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 80%;
+        }
+        select, input[type="tel"], .whatsapp-link {
+            height: 50px;
+            font-size: 24px;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        input[type="tel"] {
+            flex-grow: 1;
+        }
+        select:focus, input[type="tel"]:focus {
+            outline: none;
+            border-color: #007BFF;
+        }
+        .whatsapp-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #25D366;
+            color: white;
+            border: none;
+            text-decoration: none;
+        }
+        .whatsapp-icon {
+            font-size: 30px;
+        }
+        option {
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        function updateWhatsAppLink() {
+            const select = document.querySelector('select');
+            const input = document.querySelector('input[type="tel"]');
+            const link = document.querySelector('.whatsapp-link');
+
+            const prefix = select.value.replace("00", "+");
+            let phone = input.value;
+            if (phone.startsWith("0")) {
+                phone = phone.slice(0, 1);
+            }
+            let fullNumber = `${prefix}${phone}`;
+            if (phone.startsWith("+")) {
+                fullNumber = phone;
+            }
+            const whatsappURL = `https://wa.me/${fullNumber}`;
+
+            link.href = whatsappURL;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const select = document.querySelector('select');
+            const input = document.querySelector('input[type="tel"]');
+            select.addEventListener('change', updateWhatsAppLink);
+            input.addEventListener('input', updateWhatsAppLink);
+        });
+    </script>
+</head>
+<body>
+    <div class="input-group">
+        <select>
+            <option value="+49">🇩🇪 +49</option>
+            <option value="+43">🇦🇹 +43</option>
+            <option value="+32">🇧🇪 +32</option>
+            <option value="+359">🇧🇬 +359</option>
+            <option value="+357">🇨🇾 +357</option>
+            <option value="+385">🇭🇷 +385</option>
+            <option value="+45">🇩🇰 +45</option>
+            <option value="+34">🇪🇸 +34</option>
+            <option value="+33">🇫🇷 +33</option>
+            <option value="+30">🇬🇷 +30</option>
+            <option value="+36">🇭🇺 +36</option>
+            <option value="+353">🇮🇪 +353</option>
+            <option value="+39">🇮🇹 +39</option>
+            <option value="+371">🇱🇻 +371</option>
+            <option value="+370">🇱🇹 +370</option>
+            <option value="+352">🇱🇺 +352</option>
+            <option value="+31">🇳🇱 +31</option>
+            <option value="+48">🇵🇱 +48</option>
+            <option value="+351">🇵🇹 +351</option>
+            <option value="+40">🇷🇴 +40</option>
+        </select>
+        <input type="tel" placeholder="Introduce tu número de teléfono">
+        <a href="https://wa.me/" class="whatsapp-link" target="_blank">
+            <i class="fab fa-whatsapp whatsapp-icon"></i>
+        </a>
+    </div>
+</body>
+</html>
